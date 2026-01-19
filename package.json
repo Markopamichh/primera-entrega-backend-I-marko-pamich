@@ -1,0 +1,21 @@
+{
+  "name": "primera-entrega-backend",
+  "version": "1.0.0",
+  "description": "Servidor Express para gestión de productos y carritos de compra",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": ["express", "api", "rest", "ecommerce"],
+  "author": "Marko Pamich",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
