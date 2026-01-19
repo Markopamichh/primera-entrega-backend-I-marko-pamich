@@ -1,1 +1,55 @@
-[]
+[
+  {
+    "id": "3fe47e8a-8b51-4526-8877-4ed98a138990",
+    "title": "Laptop Gamer",
+    "description": "Laptop para gaming con RTX 4060",
+    "code": "LAP001",
+    "price": 1500000,
+    "status": true,
+    "stock": 10,
+    "category": "Computacion",
+    "thumbnails": [
+      "laptop1.jpg",
+      "laptop2.jpg"
+    ]
+  },
+  {
+    "id": "c6596bef-4bb6-4515-bd0d-699d5d54d63e",
+    "title": "Mouse Inalambrico",
+    "description": "Mouse ergonomico con sensor optico",
+    "code": "MOU001",
+    "price": 30000,
+    "status": true,
+    "stock": 50,
+    "category": "Perifericos",
+    "thumbnails": [
+      "mouse1.jpg"
+    ]
+  },
+  {
+    "id": "160cd573-477c-420d-a4a6-d31855cd55c3",
+    "title": "Teclado Mecanico RGB",
+    "description": "Teclado mecanico con switches blue",
+    "code": "TEC001",
+    "price": 45000,
+    "status": true,
+    "stock": 30,
+    "category": "Perifericos",
+    "thumbnails": [
+      "teclado1.jpg"
+    ]
+  },
+  {
+    "id": "ccda0756-3acc-4d42-94e9-5eb12efc441e",
+    "title": "Monitor 27 pulgadas",
+    "description": "Monitor LED Full HD 144Hz",
+    "code": "MON001",
+    "price": 280000,
+    "status": true,
+    "stock": 15,
+    "category": "Monitores",
+    "thumbnails": [
+      "monitor1.jpg"
+    ]
+  }
+]
