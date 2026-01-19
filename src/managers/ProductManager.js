@@ -44,7 +44,6 @@ class ProductManager {
   async addProduct(productData) {
     const products = await this.#readFile();
 
-    // Validar campos requeridos
     const requiredFields = ['title', 'description', 'code', 'price', 'stock', 'category'];
     for (const field of requiredFields) {
       if (!productData[field] && productData[field] !== 0) {
@@ -52,13 +51,11 @@ class ProductManager {
       }
     }
 
-    // Validar que el código sea único
     const codeExists = products.some(product => product.code === productData.code);
     if (codeExists) {
       throw new Error(`El código ${productData.code} ya existe`);
     }
 
-    // Validar price y stock
     if (typeof productData.price !== 'number' || productData.price <= 0) {
       throw new Error('El precio debe ser un número mayor a 0');
     }
@@ -67,7 +64,6 @@ class ProductManager {
       throw new Error('El stock debe ser un número mayor o igual a 0');
     }
 
-    // Crear nuevo producto con valores por defecto
     const newProduct = {
       id: uuidv4(),
       title: productData.title,
@@ -94,12 +90,10 @@ class ProductManager {
       return null;
     }
 
-    // No permitir modificar el id
     if (updateData.id) {
       delete updateData.id;
     }
 
-    // Si se intenta actualizar el code, validar que sea único
     if (updateData.code) {
       const codeExists = products.some(
         product => product.code === updateData.code && product.id !== id
@@ -109,11 +103,10 @@ class ProductManager {
       }
     }
 
-    // Actualizar producto manteniendo campos no modificados
     products[index] = {
       ...products[index],
       ...updateData,
-      id: products[index].id // Asegurar que el id no cambie
+      id: products[index].id
     };
 
     await this.#writeFile(products);
