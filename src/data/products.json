@@ -51,5 +51,16 @@
     "thumbnails": [
       "monitor1.jpg"
     ]
+  },
+  {
+    "id": "b1533744-daca-4fb6-88d4-58622f911a81",
+    "title": "iphone 13",
+    "description": "smartphone ultima generacion",
+    "code": "EIHW3X",
+    "price": 700,
+    "status": true,
+    "stock": 100,
+    "category": "smartphone",
+    "thumbnails": []
   }
 ]

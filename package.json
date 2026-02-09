@@ -8,11 +8,18 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
-  "keywords": ["express", "api", "rest", "ecommerce"],
+  "keywords": [
+    "express",
+    "api",
+    "rest",
+    "ecommerce"
+  ],
   "author": "Marko Pamich",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "express-handlebars": "^8.0.3",
+    "socket.io": "^4.8.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
