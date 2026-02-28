@@ -1,0 +1,56 @@
+<div class="container">
+  {{#if error}}
+    <p class="error-message">{{error}}</p>
+  {{else}}
+    <h1>{{product.title}}</h1>
+    <div class="product-detail-card">
+      <p><strong>Descripción:</strong> {{product.description}}</p>
+      <p><strong>Código:</strong> {{product.code}}</p>
+      <p><strong>Precio:</strong> ${{product.price}}</p>
+      <p><strong>Stock:</strong> {{product.stock}}</p>
+      <p><strong>Categoría:</strong> {{product.category}}</p>
+      <p><strong>Estado:</strong> {{#if product.status}}Activo{{else}}Inactivo{{/if}}</p>
+      {{#if product.thumbnails.length}}
+        <div class="thumbnails">
+          {{#each product.thumbnails}}
+            <img src="{{this}}" alt="Imagen del producto">
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="add-to-cart">
+      <h3>Agregar al carrito</h3>
+      <input type="text" id="cartId" placeholder="Ingresá el ID del carrito">
+      <button onclick="addToCart('{{product._id}}')">Agregar al carrito</button>
+      <p id="cart-msg"></p>
+    </div>
+  {{/if}}
+  <a href="/products" class="btn-back">← Volver al catálogo</a>
+</div>
+
+<script>
+  async function addToCart(productId) {
+    const cartId = document.getElementById('cartId').value.trim();
+    const msg = document.getElementById('cart-msg');
+    if (!cartId) {
+      msg.textContent = 'Por favor ingresá un ID de carrito.';
+      msg.style.color = 'red';
+      return;
+    }
+    try {
+      const res = await fetch(`/api/carts/${cartId}/products/${productId}`, { method: 'POST' });
+      if (res.ok) {
+        msg.textContent = '¡Producto agregado al carrito!';
+        msg.style.color = 'green';
+      } else {
+        const data = await res.json();
+        msg.textContent = data.error || 'Error al agregar el producto.';
+        msg.style.color = 'red';
+      }
+    } catch (e) {
+      msg.textContent = 'Error de conexión.';
+      msg.style.color = 'red';
+    }
+  }
+</script>

@@ -27,7 +27,7 @@
     <div id="productsList" class="product-grid">
       {{#if products.length}}
         {{#each products}}
-          <div class="product-card" data-id="{{this.id}}">
+          <div class="product-card" data-id="{{this._id}}">
             <h3>{{this.title}}</h3>
             <p class="description">{{this.description}}</p>
             <div class="product-details">
@@ -36,7 +36,7 @@
               <p><strong>Stock:</strong> {{this.stock}}</p>
               <p><strong>Categoría:</strong> {{this.category}}</p>
             </div>
-            <button class="delete-btn" data-id="{{this.id}}">Eliminar</button>
+            <button class="delete-btn" data-id="{{this._id}}">Eliminar</button>
           </div>
         {{/each}}
       {{else}}

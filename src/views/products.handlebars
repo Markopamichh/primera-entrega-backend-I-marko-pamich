@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Catálogo de Productos</h1>
+
+  <form method="GET" action="/products" class="filter-form">
+    <div class="form-row">
+      <input type="text" name="query" placeholder="Categoría o estado (true/false)" value="{{query}}">
+      <select name="sort">
+        <option value="">Sin ordenar</option>
+        <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Precio: menor a mayor</option>
+        <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Precio: mayor a menor</option>
+      </select>
+      <select name="limit">
+        <option value="10" {{#if (eq limit 10)}}selected{{/if}}>10 por página</option>
+        <option value="20" {{#if (eq limit 20)}}selected{{/if}}>20 por página</option>
+      </select>
+      <button type="submit">Filtrar</button>
+    </div>
+  </form>
+
+  {{#if products.length}}
+    <div class="product-grid">
+      {{#each products}}
+        <div class="product-card">
+          <h3>{{this.title}}</h3>
+          <p><strong>Precio:</strong> ${{this.price}}</p>
+          <p><strong>Categoría:</strong> {{this.category}}</p>
+          <p><strong>Stock:</strong> {{this.stock}}</p>
+          <a href="/products/{{this._id}}" class="btn-detail">Ver detalle</a>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="pagination">
+      <span>Página {{page}} de {{totalPages}}</span>
+      <div class="pagination-links">
+        {{#if hasPrevPage}}
+          <a href="{{prevLink}}" class="btn-page">← Anterior</a>
+        {{/if}}
+        {{#if hasNextPage}}
+          <a href="{{nextLink}}" class="btn-page">Siguiente →</a>
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <p class="no-products">No se encontraron productos con los filtros aplicados.</p>
+  {{/if}}
+</div>

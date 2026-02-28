@@ -1,9 +1,11 @@
+import 'dotenv/config';
 import express from 'express';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { connectDB } from './config/db.js';
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
@@ -14,14 +16,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 // Create HTTP server and Socket.io instance
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
 // Configure Handlebars
-app.engine('handlebars', engine());
+app.engine('handlebars', engine({
+  helpers: {
+    eq: (a, b) => a === b,
+    multiply: (a, b) => (a * b).toFixed(2)
+  }
+}));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -43,7 +50,9 @@ app.use('/api/carts', cartsRouter);
 // Initialize socket handlers
 initProductSocket(io);
 
-// Start server
-httpServer.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+// Connect to MongoDB, then start server
+connectDB().then(() => {
+  httpServer.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  });
 });

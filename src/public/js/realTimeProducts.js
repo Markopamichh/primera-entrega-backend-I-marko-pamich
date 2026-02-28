@@ -103,7 +103,7 @@ function renderAllProducts(products) {
 
 function createProductCard(product) {
   return `
-    <div class="product-card" data-id="${product.id}">
+    <div class="product-card" data-id="${product._id}">
       <h3>${product.title}</h3>
       <p class="description">${product.description}</p>
       <div class="product-details">
@@ -112,7 +112,7 @@ function createProductCard(product) {
         <p><strong>Stock:</strong> ${product.stock}</p>
         <p><strong>Categoría:</strong> ${product.category}</p>
       </div>
-      <button class="delete-btn" data-id="${product.id}">Eliminar</button>
+      <button class="delete-btn" data-id="${product._id}">Eliminar</button>
     </div>
   `;
 }

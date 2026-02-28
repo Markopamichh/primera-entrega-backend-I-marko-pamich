@@ -1,15 +1,14 @@
 import ProductManager from '../managers/ProductManager.js';
 
-const productManager = new ProductManager('./src/data/products.json');
+const productManager = new ProductManager();
 
 export function initProductSocket(io) {
   io.on('connection', (socket) => {
     console.log('Cliente conectado:', socket.id);
 
-    // Send current products when client connects
-    productManager.getProducts()
-      .then(products => {
-        socket.emit('products', products);
+    productManager.getProducts({ limit: 100, page: 1 })
+      .then(result => {
+        socket.emit('products', result.docs);
       })
       .catch(error => {
         console.error('Error al obtener productos:', error);
